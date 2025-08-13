@@ -3,6 +3,7 @@ package br.com.dio.persistence.migration;
 import liquibase.Liquibase;
 import liquibase.database.jvm.JdbcConnection;
 import liquibase.exception.LiquibaseException;
+import liquibase.logging.Logger;
 import liquibase.resource.ClassLoaderResourceAccessor;
 import lombok.AllArgsConstructor;
 
@@ -35,11 +36,11 @@ public class MigrationStrategy {
                         jdbcConnection);
                 liquibase.update();
             } catch (SQLException | LiquibaseException e) {
-                e.printStackTrace();
+                System.out.println(e.getMessage() + " : " +  e.getCause());
                 System.setErr(originalErr);
             }
         } catch (IOException ex){
-            ex.printStackTrace();
+            System.out.println(ex.getMessage() + " : " +  ex.getCause());
         } finally {
             System.setOut(originalOut);
             System.setErr(originalErr);

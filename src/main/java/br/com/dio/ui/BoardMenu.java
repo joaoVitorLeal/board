@@ -1,9 +1,11 @@
 package br.com.dio.ui;
 
 import br.com.dio.dto.BoardColumnInfoDTO;
+import br.com.dio.facade.BoardReportFacade;
 import br.com.dio.persistence.entity.BoardColumnEntity;
 import br.com.dio.persistence.entity.BoardEntity;
 import br.com.dio.persistence.entity.CardEntity;
+import br.com.dio.reports.template.impl.BoardReport;
 import br.com.dio.service.BoardColumnQueryService;
 import br.com.dio.service.BoardQueryService;
 import br.com.dio.service.CardQueryService;
@@ -26,7 +28,7 @@ public class BoardMenu {
         try {
             System.out.printf("Bem vindo ao board %s, selecione a operação desejada\n", entity.getId());
             var option = -1;
-            while (option != 9) {
+            while (option != 10) {
                 System.out.println("1 - Criar um card");
                 System.out.println("2 - Mover um card");
                 System.out.println("3 - Bloquear um card");
@@ -35,8 +37,9 @@ public class BoardMenu {
                 System.out.println("6 - Ver board");
                 System.out.println("7 - Ver coluna com cards");
                 System.out.println("8 - Ver card");
-                System.out.println("9 - Voltar para o menu anterior um card");
-                System.out.println("10 - Sair");
+                System.out.println("9 - Gerar relatório");
+                System.out.println("10 - Voltar para o menu anterior um card");
+                System.out.println("11 - Sair");
                 option = scanner.nextInt();
                 switch (option) {
                     case 1 -> createCard();
@@ -47,16 +50,19 @@ public class BoardMenu {
                     case 6 -> showBoard();
                     case 7 -> showColumn();
                     case 8 -> showCard();
-                    case 9 -> System.out.println("Voltando para o menu anterior");
-                    case 10 -> System.exit(0);
+                    case 9 -> generateBoardReportByCardId();
+                    case 10 -> System.out.println("Voltando para o menu anterior");
+                    case 11 -> logOut();
                     default -> System.out.println("Opção inválida, informe uma opção do menu");
                 }
             }
         }catch (SQLException ex){
             ex.printStackTrace();
-            System.exit(0);
+            logOut();
         }
     }
+
+
 
     private void createCard() throws SQLException{
         var card = new CardEntity();
@@ -163,6 +169,11 @@ public class BoardMenu {
                             c -> {
                                 System.out.printf("Card %s - %s.\n", c.id(), c.title());
                                 System.out.printf("Descrição: %s\n", c.description());
+                                System.out.printf("Inserido na coluna em: %s\n", c.enteredColumnAt());
+                                System.out.printf(c.isExitedColumn()
+                                        ? "Saiu da coluna em: " + c.exitedColumnAt() + "\n"
+                                        : ""
+                                );
                                 System.out.println(c.blocked() ?
                                         "Está bloqueado. Motivo: " + c.blockReason() :
                                         "Não está bloqueado");
@@ -173,4 +184,33 @@ public class BoardMenu {
         }
     }
 
+    @Deprecated(since = "3.2.9")
+    private void generateBoardReport() throws SQLException {
+        // FIX
+        System.out.println("Gerando relatório..");
+        BoardReportFacade boardReportFacade = new BoardReportFacade(getConnection(), new BoardReport());
+        boardReportFacade.registerReportData();
+        System.out.println("Relatório Gerado!");
+    }
+
+    private void generateBoardReportByCardId() throws SQLException {
+        System.out.println("Informe o id do card que deseja gerar o relatório");
+        var incomeCardId = scanner.nextLong();
+        try (var connection = getConnection()) {
+            new CardQueryService(connection).findById(incomeCardId)
+                    .ifPresentOrElse(c -> {
+                                System.out.println("Gerando relatório..");
+                                BoardReportFacade boardReportFacade = new BoardReportFacade(connection, new BoardReport());
+                                boardReportFacade.registerReportDataByCardId(c.id());
+                                System.out.println("Relatório Gerado!");;
+                            },
+                            () -> System.out.printf("Não foi possível gerar o relatório: não existe um card com o id %s\n", incomeCardId)
+                    );
+        }
+    }
+
+    private void logOut() {
+        scanner.close();
+        System.exit(0);
+    }
 }

@@ -1,41 +1,119 @@
-ago. 29, 2024 10:37:26 AM liquibase.changelog
+ago. 13, 2025 3:13:18 PM liquibase.changelog
 INFORMAÇÕES: Reading resource: db/changelog/migrations/db.changelog-202408191938.sql
-ago. 29, 2024 10:37:26 AM liquibase.changelog
+ago. 13, 2025 3:13:18 PM liquibase.changelog
+INFORMAÇÕES: Reading from board.DATABASECHANGELOG
+ago. 13, 2025 3:13:18 PM liquibase.changelog
 INFORMAÇÕES: Reading resource: db/changelog/migrations/db.changelog-202408210954.sql
-ago. 29, 2024 10:37:26 AM liquibase.changelog
+ago. 13, 2025 3:13:18 PM liquibase.changelog
 INFORMAÇÕES: Reading resource: db/changelog/migrations/db.changelog-202408211004.sql
-ago. 29, 2024 10:37:26 AM liquibase.changelog
+ago. 13, 2025 3:13:18 PM liquibase.changelog
 INFORMAÇÕES: Reading resource: db/changelog/migrations/db.changelog-202408211005.sql
-ago. 29, 2024 10:37:26 AM liquibase.changelog
+ago. 13, 2025 3:13:18 PM liquibase.changelog
 INFORMAÇÕES: Reading resource: db/changelog/migrations/db.changelog-202408281807.sql
-ago. 29, 2024 10:37:26 AM liquibase.changelog
+ago. 13, 2025 3:13:18 PM liquibase.changelog
+INFORMAÇÕES: Reading resource: db/changelog/migrations/db.changelog-202508101500.sql
+ago. 13, 2025 3:13:18 PM liquibase.changelog
+INFORMAÇÕES: Reading resource: db/changelog/migrations/db.changelog-202508121424.sql
+ago. 13, 2025 3:13:18 PM liquibase.changelog
+INFORMAÇÕES: Reading resource: db/changelog/migrations/db.changelog-202508121430.sql
+ago. 13, 2025 3:13:18 PM liquibase.changelog
+INFORMAÇÕES: Reading resource: db/changelog/migrations/db.changelog-202508121525.sql
+ago. 13, 2025 3:13:18 PM liquibase.lockservice
+INFORMAÇÕES: Successfully acquired change log lock
+ago. 13, 2025 3:13:18 PM liquibase.command
+INFORMAÇÕES: Using deploymentId: 5108798030
+ago. 13, 2025 3:13:18 PM liquibase.changelog
 INFORMAÇÕES: Reading from board.DATABASECHANGELOG
-Database is up to date, no changesets to execute
-ago. 29, 2024 10:37:26 AM liquibase.changelog
-INFORMAÇÕES: Reading from board.DATABASECHANGELOG
+Running Changeset: db/changelog/migrations/db.changelog-202508121430.sql::202508121430::joao.vitor.leal
+ago. 13, 2025 3:13:18 PM liquibase.changelog
+GRAVE: ChangeSet db/changelog/migrations/db.changelog-202508121430.sql::202508121430::joao.vitor.leal encountered an exception.
+liquibase.exception.DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DELIMITER' at line 1 [Failed SQL: (1064) DELIMITER]
+	at liquibase.executor.jvm.JdbcExecutor$ExecuteStatementCallback.doInStatement(JdbcExecutor.java:520)
+	at liquibase.executor.jvm.JdbcExecutor.execute(JdbcExecutor.java:85)
+	at liquibase.executor.jvm.JdbcExecutor.execute(JdbcExecutor.java:188)
+	at liquibase.executor.AbstractExecutor.execute(AbstractExecutor.java:148)
+	at liquibase.database.AbstractJdbcDatabase.executeStatements(AbstractJdbcDatabase.java:1198)
+	at liquibase.changelog.ChangeSet.execute(ChangeSet.java:816)
+	at liquibase.changelog.visitor.UpdateVisitor.executeAcceptedChange(UpdateVisitor.java:127)
+	at liquibase.changelog.visitor.UpdateVisitor.visit(UpdateVisitor.java:71)
+	at liquibase.changelog.ChangeLogIterator.lambda$run$0(ChangeLogIterator.java:133)
+	at liquibase.Scope.lambda$child$0(Scope.java:216)
+	at liquibase.Scope.child(Scope.java:225)
+	at liquibase.Scope.child(Scope.java:215)
+	at liquibase.Scope.child(Scope.java:194)
+	at liquibase.changelog.ChangeLogIterator.lambda$run$1(ChangeLogIterator.java:122)
+	at liquibase.Scope.lambda$child$0(Scope.java:216)
+	at liquibase.Scope.child(Scope.java:225)
+	at liquibase.Scope.child(Scope.java:215)
+	at liquibase.Scope.child(Scope.java:194)
+	at liquibase.Scope.child(Scope.java:282)
+	at liquibase.Scope.child(Scope.java:286)
+	at liquibase.changelog.ChangeLogIterator.run(ChangeLogIterator.java:91)
+	at liquibase.command.core.AbstractUpdateCommandStep.lambda$run$0(AbstractUpdateCommandStep.java:114)
+	at liquibase.Scope.lambda$child$0(Scope.java:216)
+	at liquibase.Scope.child(Scope.java:225)
+	at liquibase.Scope.child(Scope.java:215)
+	at liquibase.Scope.child(Scope.java:194)
+	at liquibase.command.core.AbstractUpdateCommandStep.run(AbstractUpdateCommandStep.java:112)
+	at liquibase.command.core.UpdateCommandStep.run(UpdateCommandStep.java:100)
+	at liquibase.command.CommandScope.lambda$execute$6(CommandScope.java:263)
+	at liquibase.Scope.child(Scope.java:225)
+	at liquibase.Scope.child(Scope.java:201)
+	at liquibase.command.CommandScope.execute(CommandScope.java:251)
+	at liquibase.Liquibase.lambda$update$0(Liquibase.java:216)
+	at liquibase.Scope.lambda$child$0(Scope.java:216)
+	at liquibase.Scope.child(Scope.java:225)
+	at liquibase.Scope.child(Scope.java:215)
+	at liquibase.Scope.child(Scope.java:194)
+	at liquibase.Liquibase.runInScope(Liquibase.java:1366)
+	at liquibase.Liquibase.update(Liquibase.java:205)
+	at liquibase.Liquibase.update(Liquibase.java:188)
+	at liquibase.Liquibase.update(Liquibase.java:175)
+	at liquibase.Liquibase.update(Liquibase.java:155)
+	at br.com.dio.persistence.migration.MigrationStrategy.executeMigration(MigrationStrategy.java:37)
+	at br.com.dio.Main.main(Main.java:16)
+Caused by: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DELIMITER' at line 1
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:112)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:114)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:837)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:685)
+	at liquibase.executor.jvm.JdbcExecutor$ExecuteStatementCallback.doInStatement(JdbcExecutor.java:512)
+	... 43 more
+
 
 UPDATE SUMMARY
 Run:                          0
-Previously run:               5
+Previously run:               7
 Filtered out:                 0
 -------------------------------
-Total change sets:            5
+Total change sets:            9
 
-ago. 29, 2024 10:37:26 AM liquibase.util
+ago. 13, 2025 3:13:18 PM liquibase.util
 INFORMAÇÕES: UPDATE SUMMARY
-ago. 29, 2024 10:37:26 AM liquibase.util
+ago. 13, 2025 3:13:18 PM liquibase.util
 INFORMAÇÕES: Run:                          0
-ago. 29, 2024 10:37:26 AM liquibase.util
-INFORMAÇÕES: Previously run:               5
-ago. 29, 2024 10:37:26 AM liquibase.util
+ago. 13, 2025 3:13:18 PM liquibase.util
+INFORMAÇÕES: Previously run:               7
+ago. 13, 2025 3:13:18 PM liquibase.util
 INFORMAÇÕES: Filtered out:                 0
-ago. 29, 2024 10:37:26 AM liquibase.util
+ago. 13, 2025 3:13:18 PM liquibase.util
 INFORMAÇÕES: -------------------------------
-ago. 29, 2024 10:37:26 AM liquibase.util
-INFORMAÇÕES: Total change sets:            5
-ago. 29, 2024 10:37:26 AM liquibase.util
+ago. 13, 2025 3:13:18 PM liquibase.util
+INFORMAÇÕES: Total change sets:            9
+ago. 13, 2025 3:13:18 PM liquibase.util
 INFORMAÇÕES: Update summary generated
-ago. 29, 2024 10:37:26 AM liquibase.lockservice
+ago. 13, 2025 3:13:18 PM liquibase.command
+INFORMAÇÕES: Update command encountered an exception.
+ago. 13, 2025 3:13:18 PM liquibase.lockservice
 INFORMAÇÕES: Successfully released change log lock
-ago. 29, 2024 10:37:26 AM liquibase.command
+ago. 13, 2025 3:13:18 PM liquibase.command
+INFORMAÇÕES: Logging exception.
+ERROR: Exception Details
+ERROR: Exception Primary Class:  SQLSyntaxErrorException
+ERROR: Exception Primary Reason:  You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DELIMITER' at line 1
+ERROR: Exception Primary Source:  MySQL 8.0.41
+ago. 13, 2025 3:13:18 PM liquibase.command
 INFORMAÇÕES: Command execution complete
+liquibase.exception.LiquibaseException: liquibase.exception.MigrationFailedException: Migration failed for changeset db/changelog/migrations/db.changelog-202508121430.sql::202508121430::joao.vitor.leal:
+     Reason: liquibase.exception.DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DELIMITER' at line 1 [Failed SQL: (1064) DELIMITER] : liquibase.exception.LiquibaseException: liquibase.exception.MigrationFailedException: Migration failed for changeset db/changelog/migrations/db.changelog-202508121430.sql::202508121430::joao.vitor.leal:
+     Reason: liquibase.exception.DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DELIMITER' at line 1 [Failed SQL: (1064) DELIMITER]

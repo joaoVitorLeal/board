@@ -34,7 +34,7 @@ public class MainMenu {
                 case 1 -> createBoard();
                 case 2 -> selectBoard();
                 case 3 -> deleteBoard();
-                case 4 -> System.exit(0);
+                case 4 -> logOut();
                 default -> System.out.println("Opção inválida, informe uma opção do menu");
             }
         }
@@ -114,4 +114,8 @@ public class MainMenu {
         return boardColumn;
     }
 
+    private void logOut() {
+        scanner.close();
+        System.exit(0);
+    }
 }
